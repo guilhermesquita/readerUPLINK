@@ -10,15 +10,21 @@ function messageDecripter(uplink) {
     const infoHexadecimal = uplinkTreatment.trim().slice(8, 10)
     const binary = parseInt(infoHexadecimal, 16).toString(2)
 
-    const inforMap = {
-        0: 'Alarme de corte de cabo ativo',
-        2: 'Alarme de corte de vazamento ativo',
-        3: 'Alarme de ataque magnético'
-    }
+    const info = []
 
-    const info = Object.entries(inforMap)
-        .filter(([key, _]) => binary[key] === '1')
-        .map(([_,msg]) => msg)
+    for (i in binary) {
+        if (binary[i] === '1') {
+            if (i == 0) {
+                info.push('Alarme de corte de cabo ativo')
+            }
+            if (i == 2) {
+                info.push('Alarme de corte de vazamento ativo')
+            }
+            if (i == 3) {
+                info.push('Alarme de ataque magnético')
+            }
+        }
+    }
 
     //TRATAMENTOS DADOS DE BATERIA
     const bateryHexadecimal = uplinkTreatment.trim().slice(10, 12)
