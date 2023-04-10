@@ -7,7 +7,7 @@ function messageDecripter(uplink) {
     const pulseCounter = parseInt(pulseCounterHexadecimal, 16)
 
     //TRATAMENTOS DADOS DE ALARMES
-    const infoHexadecimal = uplinkTreatment.trim().slice(8, 10)
+    const infoHexadecimal = uplinkTreatment.slice(8, 10)
     const binary = parseInt(infoHexadecimal, 16).toString(2)
 
     const inforMap = {
@@ -21,11 +21,11 @@ function messageDecripter(uplink) {
         .map(([_,msg]) => msg)
 
     //TRATAMENTOS DADOS DE BATERIA
-    const bateryHexadecimal = uplinkTreatment.trim().slice(10, 12)
+    const bateryHexadecimal = uplinkTreatment.slice(10, 12)
     const batery = parseInt(bateryHexadecimal, 16)
 
     //TRATAMENTOS DADOS DE INTERVALOS
-    const intervalHexadecimal = uplinkTreatment.trim().slice(12, 16)
+    const intervalHexadecimal = uplinkTreatment.slice(12, 16)
     const interval = parseInt(intervalHexadecimal, 16) / 2
 
     const payload = {
