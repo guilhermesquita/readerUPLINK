@@ -15,8 +15,7 @@ function messageDecripter(uplink) {
     } else {
         bin = parseInt(infoHexadecimal, 16).toString(2)
     }
-    //const binary = parseInt(infoHexadecimal, 16).toString(2)
-
+    
     const inforMap = {
         0: 'Alarme de corte de cabo ativo',
         2: 'Alarme de corte de vazamento ativo',
