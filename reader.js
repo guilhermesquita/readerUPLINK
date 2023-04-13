@@ -8,7 +8,14 @@ function messageDecripter(uplink) {
 
     //TRATAMENTOS DADOS DE ALARMES
     const infoHexadecimal = uplinkTreatment.slice(8, 10)
-    const binary = parseInt(infoHexadecimal, 16).toString(2)
+    let bin
+    if (infoHexadecimal[0] === '0') {
+        const binary = parseInt(infoHexadecimal, 16).toString(2)
+        bin = binary.toString(2).padStart(4, '0');
+    } else {
+        bin = parseInt(infoHexadecimal, 16).toString(2)
+    }
+    //const binary = parseInt(infoHexadecimal, 16).toString(2)
 
     const inforMap = {
         0: 'Alarme de corte de cabo ativo',
@@ -17,8 +24,8 @@ function messageDecripter(uplink) {
     }
 
     const info = Object.entries(inforMap)
-        .filter(([key, _]) => binary[key] === '1')
-        .map(([_,msg]) => msg)
+        .filter(([key, _]) => bin[key] === '1')
+        .map(([_, msg]) => msg)
 
     //TRATAMENTOS DADOS DE BATERIA
     const bateryHexadecimal = uplinkTreatment.slice(10, 12)
